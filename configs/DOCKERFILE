@@ -28,14 +28,12 @@ RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' \
     && sed -i 's/UsePAM yes/#UsePAM yes/g' \
             /etc/ssh/sshd_config
 
-RUN sudo pam-auth-update
 RUN useradd -c 'System Administartor' -m -d /home/$SSH_USER \
             -s /bin/bash $SSH_USER \
     && usermod -aG sudo $SSH_USER \
     && mkdir -m 700 /home/$SSH_USER/.ssh \
     && chown $SSH_USER.$SSH_USER /home/$SSH_USER/.ssh \
     && echo '$SSH_USER ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
-    && echo '$SSH_USER:$SSH_PASSWORD' | chpasswd
 
 ENTRYPOINT ['/user/bin/dumb-init', '--']
 EXPOSE 22
