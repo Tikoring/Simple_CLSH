@@ -1,10 +1,42 @@
 version: '3'
 services:
-  work01:
+  work:
     image: ssh-server:ubuntu-22.04
     build: 
       context: .
       dockerfile: DOCKERFILE
-    hostname: work01
+    hostname: work
+    volumes:
+      - ../:/build
+  node01:
+    image: ssh-server:ubuntu-22.04
+    build: 
+      context: .
+      dockerfile: DOCKERFILE
+    hostname: node01
+    volumes:
+      - ../:/build
+  node02:
+    image: ssh-server:ubuntu-22.04
+    build: 
+      context: .
+      dockerfile: DOCKERFILE
+    hostname: node02
+    volumes:
+      - ../:/build
+  node03:
+    image: ssh-server:ubuntu-22.04
+    build: 
+      context: .
+      dockerfile: DOCKERFILE
+    hostname: node03
+    volumes:
+      - ../:/build
+  node04:
+    image: ssh-server:ubuntu-22.04
+    build: 
+      context: .
+      dockerfile: DOCKERFILE
+    hostname: node04
     volumes:
       - ../:/build
